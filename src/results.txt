@@ -1,0 +1,132 @@
+Neural Network
+MLPClassifier(hidden_layer_sizes=(250,250,250,250,250,250), max_iter=300)
+              precision    recall  f1-score   support
+
+           0       0.53      0.54      0.54       651
+           1       0.44      0.42      0.43       550
+
+   micro avg       0.49      0.49      0.49      1201
+   macro avg       0.48      0.48      0.48      1201
+weighted avg       0.49      0.49      0.49      1201
+
+Neural Network
+MLPClassifier(hidden_layer_sizes=(250,250,250,250,250,250), max_iter=500)
+              precision    recall  f1-score   support
+
+           0       0.53      0.50      0.52       651
+           1       0.45      0.47      0.46       550
+
+   micro avg       0.49      0.49      0.49      1201
+   macro avg       0.49      0.49      0.49      1201
+weighted avg       0.49      0.49      0.49      1201
+
+Decision Tree
+DecisionTreeClassifier ( random_state = None,criterion = 'gini',min_samples_split=5)
+              precision    recall  f1-score   support
+
+           0       0.58      0.59      0.59       651
+           1       0.50      0.49      0.50       550
+
+   micro avg       0.55      0.55      0.55      1201
+   macro avg       0.54      0.54      0.54      1201
+weighted avg       0.54      0.55      0.54      1201
+
+Decision Tree
+DecisionTreeClassifier ( random_state = None,criterion = 'gini',min_samples_split=5)
+              precision    recall  f1-score   support
+
+           0       0.57      0.59      0.58       651
+           1       0.50      0.48      0.49       550
+
+   micro avg       0.54      0.54      0.54      1201
+   macro avg       0.54      0.54      0.54      1201
+weighted avg       0.54      0.54      0.54      1201
+
+Neural Network
+ MLPClassifier ( hidden_layer_sizes = ( 250 , 250 , 250 , 250 , 250 , 250 ) , max_iter=500)
+              precision    recall  f1-score   support
+
+           0       0.54      0.52      0.53       651
+           1       0.45      0.47      0.46       550
+
+   micro avg       0.50      0.50      0.50      1201
+   macro avg       0.50      0.50      0.49      1201
+weighted avg       0.50      0.50      0.50      1201
+
+Naive Bay
+GaussianNB()
+              precision    recall  f1-score   support
+
+           0       0.54      0.95      0.69       651
+           1       0.42      0.04      0.07       550
+
+   micro avg       0.53      0.53      0.53      1201
+   macro avg       0.48      0.50      0.38      1201
+weighted avg       0.48      0.53      0.41      1201
+
+Decision Tree
+DecisionTreeClassifier ( random_state = None,criterion = 'gini',min_samples_split=5)
+              precision    recall  f1-score   support
+
+           0       0.58      0.59      0.58       651
+           1       0.50      0.49      0.49       550
+
+   micro avg       0.54      0.54      0.54      1201
+   macro avg       0.54      0.54      0.54      1201
+weighted avg       0.54      0.54      0.54      1201
+
+Neural Network
+ MLPClassifier ( hidden_layer_sizes = ( 250 , 250 , 250 , 250 , 250 , 250 ) , max_iter=500)
+              precision    recall  f1-score   support
+
+           0       0.52      0.55      0.54       651
+           1       0.43      0.41      0.42       550
+
+   micro avg       0.48      0.48      0.48      1201
+   macro avg       0.48      0.48      0.48      1201
+weighted avg       0.48      0.48      0.48      1201
+
+Naive Bay
+GaussianNB()
+              precision    recall  f1-score   support
+
+           0       0.54      0.95      0.69       651
+           1       0.42      0.04      0.07       550
+
+   micro avg       0.53      0.53      0.53      1201
+   macro avg       0.48      0.50      0.38      1201
+weighted avg       0.48      0.53      0.41      1201
+
+Decision Tree
+DecisionTreeClassifier ( random_state = None,criterion = 'gini',min_samples_split=5)
+              precision    recall  f1-score   support
+
+           0       0.58      0.60      0.59       651
+           1       0.50      0.48      0.49       550
+
+   micro avg       0.54      0.54      0.54      1201
+   macro avg       0.54      0.54      0.54      1201
+weighted avg       0.54      0.54      0.54      1201
+
+Neural Network
+ MLPClassifier ( hidden_layer_sizes = ( 250 , 250 , 250 , 250 , 250 , 250 ) , max_iter=500)
+              precision    recall  f1-score   support
+
+           0       0.53      0.51      0.52       651
+           1       0.44      0.47      0.46       550
+
+   micro avg       0.49      0.49      0.49      1201
+   macro avg       0.49      0.49      0.49      1201
+weighted avg       0.49      0.49      0.49      1201
+
+    
+Bagging guess
+              precision    recall  f1-score   support
+
+           0       0.55      0.76      0.63       651
+           1       0.47      0.26      0.33       550
+
+   micro avg       0.53      0.53      0.53      1201
+   macro avg       0.51      0.51      0.48      1201
+weighted avg       0.51      0.53      0.50      1201
+
