@@ -19,6 +19,8 @@ training_data = [] #data to train the data
 training_results = [] #the known results to train with
 champ_list = defaultdict(int)
 
+loop = True
+
 def read_in_list():
     global champ_list
     with open("champ_list.txt","r") as file:
@@ -111,14 +113,14 @@ def load_in_games():
     #print(games[1])
 #print(dataframes["champs"])
     
-def Network():
+def Network(args={'hidden_layer_sizes':(250,250,250,250,250,250), 'max_iter':500}):
     global games
     global cross_section
     global cross_results
     global training_data
-    global training_results
+    global training_results 
     scaler = StandardScaler()
-    net = MLPClassifier(hidden_layer_sizes=(250,250,250,250,250,250), max_iter=500)
+    net = MLPClassifier(**args)
     training_data = np.array(training_data)
     cross_section = np.array(cross_section)
     training_results = np.array(training_results)
@@ -132,7 +134,7 @@ def Network():
     print("Neural Network",file = results)
     # MAKE SURE TO ALSO CHANGE THE BELOW WHEN CHANGING THE MLP CLASSIFIER THIS IS TO KEEP TRAK
     # OF WHAT WAS RAN AND ITS OUTCOME
-    print(" MLPClassifier ( hidden_layer_sizes = ( 250 , 250 , 250 , 250 , 250 , 250 ) , max_iter=500)", file = results)
+    print(f" MLPClassifier ({args})", file = results)
     print(classification_report(cross_results,x),file=results)
     np.savetxt('test_neural.dat',x,delimiter = ',',fmt='%s')
 
@@ -153,22 +155,23 @@ def Bayes():
     print(classification_report(cross_results,x),file=results)
     np.savetxt('test_bay.dat',x,delimiter = ',',fmt='%s')
     
-def Decision():
+def Decision(args={'random_state':None, 'criterion':'gini', 'min_samples_split':5}):
     global games
     global cross_section
     global cross_results
     global training_data
     global training_results
-    World_tree = tree.DecisionTreeClassifier(random_state=None,criterion='gini',min_samples_split=5)
+    World_tree = tree.DecisionTreeClassifier(**args)
     World_tree = World_tree.fit(training_data,training_results)
     x = World_tree.predict(cross_section)
     results = open("results.txt", "a")
     print("Decision Tree",file = results)
     # MAKE SURE TO ALSO CHANGE THE BELOW WHEN CHANGING THE DECISION TREE CLASSIFIER THIS IS TO KEEP TRAK
     # OF WHAT WAS RAN AND ITS OUTCOME
-    print("DecisionTreeClassifier ( random_state = None,criterion = 'gini',min_samples_split=5)", file = results)
+    print(f"DecisionTreeClassifier ({args})", file = results)
     print(classification_report(cross_results,x),file=results)
     np.savetxt('test_tree.dat',x,delimiter = ',',fmt='%s')
+    
 def Baggage_Claim():
     global cross_results
     neural_file = open("test_neural.dat", "r")
@@ -210,15 +213,53 @@ def Baggage_Claim():
     results = open("results.txt", "a")
     print("Bagging guess",file = results)
     print(classification_report(cross_results,bag_guess),file=results)
+
+def loop():
+    mlp_keys = ['hidden_layer_sizes', 'activation', 'alpha', 'learning_rate']
+    m_s = [ [(50,50,50), (250, 250, 250, 250, 250, 250), (100,)], ['tanh', 'relu'],
+            [0.0001, 0.05], ['constant','adaptive'] ]
+
+    mlp_combos = [(a, b, c, d) for a in m_s[0] for b in m_s[1] \
+                  for c in m_s[2] for d in m_s[3]]
+
+    dt_keys = ["criterion", "min_samples_split", "max_features"]
+    d_s = [ ["gini", "entropy"], [2, 5, 8], ["sqrt", "log2", None]]
+
+    print(mlp_combos)
+    dt_combos = [(a,b,c) for a in d_s[0] for b in d_s[1] for c in d_s[2]]
+
+    count = 0
+    for mlp in mlp_combos:
+        # Create arg dicts
+        mlp_args = {mlp_keys[i]:mlp[i] for i in range(4)}
         
+        for dt in dt_combos: 
+            count += 1
+            
+            # Create arg dicts
+            dt_args = {dt_keys[i]:dt[i] for i in range(3)}
+
+            print(f"----- Count = {count} -----\nmlp = {mlp_args}\n\ndt = {dt_args}\n")
+    
+            # Call functions
+            Bayes()
+            Decision(dt_args)
+            Network(mlp_args)
+            Baggage_Claim()
+    
 def main():
     read_in_list()
     load_in_games()
     set_up_cross_validation(sys.argv[1],sys.argv[2])
-    Bayes()
-    Decision()
-    Network()
-    Baggage_Claim()
+    
+    if loop:
+        loop()
+        
+    else:
+        Bayes()
+        Decision()
+        Network()
+        Baggage_Claim()
     print(sys.argv)
 if (__name__ == "__main__") :
     main()
